@@ -4,11 +4,13 @@ public class Item {
     private int mImagen;
     private String mText;
     private String mText2;
+    private int mIndex;
 
-    public Item(int imagen, String text1, String text2){
+    public Item(int imagen, String text1, String text2, int index){
         mImagen = imagen;
         mText = text1;
         mText2 = text2;
+        mIndex = index;
 
     }
 
@@ -22,5 +24,9 @@ public class Item {
 
     public String getmText2() {
         return mText2;
+    }
+
+    public int removeItem(){
+        return mIndex;
     }
 }
