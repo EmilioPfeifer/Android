@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Item> Items;
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private Adaptador mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private Button btnInsert;
@@ -29,22 +29,17 @@ public class MainActivity extends AppCompatActivity {
         Items.add(new Item(R.drawable.ic_all_out, "Line 1", "Line 2", Items.size()));
 
         construirRecyclerView();
+        setButtons();
+    }
 
+    public void setButtons() {
         btnInsert = findViewById(R.id.btn_insert);
-
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 insertItem();
             }
         });
-    }
-
-
-    public void insertItem(){
-        Items.add(new Item(R.drawable.ic_all_out, "Line 1", "Line 2", Items.size()));
-        System.out.println(Items.size());
-        mAdapter.notifyDataSetChanged();
     }
 
     private void construirRecyclerView() {
@@ -55,6 +50,22 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new Adaptador.OnItemClickListener() {
+            @Override
+            public void onDeleteItemClick(int index) {
+                removeItem(index);
+            }
+        });
+    }
+
+    public void insertItem() {
+        Items.add(new Item(R.drawable.ic_all_out, "Line 1", "Line 2", Items.size()));
+        mAdapter.notifyItemInserted(Items.size());
+    }
+    public void removeItem(int index) {
+        Items.remove(index);
+        mAdapter.notifyItemRemoved(index);
     }
 
 }
