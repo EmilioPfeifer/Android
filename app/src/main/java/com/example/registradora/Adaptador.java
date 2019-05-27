@@ -1,11 +1,9 @@
 package com.example.registradora;
 
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,8 +67,8 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.mViewHolder> {
     public void onBindViewHolder(mViewHolder holder, int i) {
         Item currentItem = mList.get(i);
         holder.mImageView.setImageResource(currentItem.getmImagen());
-        holder.mTextView1.setText(currentItem.getmText());
-        holder.mTextView2.setText(currentItem.getmText2());
+        holder.mTextView1.setText(String.valueOf(currentItem.getmPrecio()));
+        holder.mTextView2.setText(currentItem.getmDetalle());
     }
 
     @Override

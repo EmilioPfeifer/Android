@@ -2,14 +2,14 @@ package com.example.registradora;
 
 public class Item {
     private int mImagen;
-    private String mText;
-    private String mText2;
+    private int mPrecio;
+    private String mDetalle;
     private int mIndex;
 
-    public Item(int imagen, String text1, String text2, int index){
+    public Item(int imagen, int precio, String detalle, int index){
         mImagen = imagen;
-        mText = text1;
-        mText2 = text2;
+        mPrecio = precio;
+        mDetalle = detalle;
         mIndex = index;
 
     }
@@ -18,12 +18,12 @@ public class Item {
         return mImagen;
     }
 
-    public String getmText() {
-        return mText;
+    public int getmPrecio() {
+        return mPrecio;
     }
 
-    public String getmText2() {
-        return mText2;
+    public String getmDetalle() {
+        return mDetalle;
     }
 
     public int removeItem(){

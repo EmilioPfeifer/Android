@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Dialog_Detalle.DialogListener {
 
     private ArrayList<Item> Items;
 
@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Items = new ArrayList<>();
-        Items.add(new Item(R.drawable.ic_all_out, "Line 1", "Line 2", Items.size()));
-        Items.add(new Item(R.drawable.ic_all_out, "Line 1", "Line 2", Items.size()));
+        Items.add(new Item(R.drawable.ic_all_out, 0, "Line 2", Items.size()));
+        Items.add(new Item(R.drawable.ic_all_out, 0, "Line 2", Items.size()));
 
         construirRecyclerView();
         setButtons();
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertItem();
+                openDialog();
             }
         });
     }
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void insertItem() {
-        Items.add(new Item(R.drawable.ic_all_out, "Line 1", "Line 2", Items.size()));
+    public void insertItem(int precio, String detalles) {
+        Items.add(new Item(R.drawable.ic_all_out, precio, detalles, Items.size()));
         mAdapter.notifyItemInserted(Items.size());
     }
     public void removeItem(int index) {
@@ -68,4 +68,13 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.notifyItemRemoved(index);
     }
 
+    public void openDialog() {
+        Dialog_Detalle d = new Dialog_Detalle();
+        d.show(getSupportFragmentManager(), "dialog");
+    }
+
+    @Override
+    public void obtenerTextos(int precio, String detalle) {
+        insertItem(precio, detalle);
+    }
 }
