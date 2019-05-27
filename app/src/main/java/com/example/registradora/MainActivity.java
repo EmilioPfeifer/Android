@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements Dialog_Detalle.Di
     private Adaptador mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private TextView mTotal;
     private Button btnInsert;
 
     @Override
@@ -25,8 +27,6 @@ public class MainActivity extends AppCompatActivity implements Dialog_Detalle.Di
         setContentView(R.layout.activity_main);
 
         Items = new ArrayList<>();
-        Items.add(new Item(R.drawable.ic_all_out, 0, "Line 2", Items.size()));
-        Items.add(new Item(R.drawable.ic_all_out, 0, "Line 2", Items.size()));
 
         construirRecyclerView();
         setButtons();
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements Dialog_Detalle.Di
     private void construirRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
+        mTotal = findViewById(R.id.total);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new Adaptador(Items);
 
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements Dialog_Detalle.Di
     public void removeItem(int index) {
         Items.remove(index);
         mAdapter.notifyItemRemoved(index);
+        mTotal.setText(String.valueOf(obtTotal()));
     }
 
     public void openDialog() {
@@ -73,8 +75,17 @@ public class MainActivity extends AppCompatActivity implements Dialog_Detalle.Di
         d.show(getSupportFragmentManager(), "dialog");
     }
 
+    private int obtTotal() {
+        int total = 0;
+        for (Item it : Items) {
+            total += it.getmPrecio();
+        }
+        return  total;
+    }
+
     @Override
     public void obtenerTextos(int precio, String detalle) {
         insertItem(precio, detalle);
+        mTotal.setText(String.valueOf(obtTotal()));
     }
 }

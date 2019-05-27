@@ -16,6 +16,18 @@
         android:layout_marginBottom="75dp"
     />
 
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Total"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/recyclerView"
+        android:layout_centerHorizontal="true"
+    />
+
     <Button
         android:id="@+id/btn_insert"
         android:layout_width="201dp"
@@ -23,7 +35,8 @@
         android:layout_alignBottom="@+id/recyclerView"
         android:layout_marginBottom="-60dp"
         android:layout_centerHorizontal="true"
-        android:text="insert" />
+        android:text="insert"
+    />
 
 
 </RelativeLayout>
